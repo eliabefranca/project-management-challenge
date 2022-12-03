@@ -19,6 +19,12 @@ const AddProject: React.FC = () => {
     setName(e.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      setIsAddingNewProject(false);
+    }
+  };
+
   const inputRef = useRef<InputRef>(null);
 
   useEffect(() => {
@@ -42,6 +48,7 @@ const AddProject: React.FC = () => {
               value={name}
               onChange={handleNameChange}
               ref={inputRef}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </Col>

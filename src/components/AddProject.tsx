@@ -1,5 +1,5 @@
-import { Button, Col, Input, Row } from 'antd';
-import React, { useState } from 'react';
+import { Button, Col, Input, InputRef, Row } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../hooks/useProjects';
 
 const AddProject: React.FC = () => {
@@ -19,6 +19,14 @@ const AddProject: React.FC = () => {
     setName(e.target.value);
   };
 
+  const inputRef = useRef<InputRef>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (inputRef.current) inputRef.current.focus();
+    }, 100);
+  }, []);
+
   return (
     <Col span={24} className="p-1 b-y b-y-2 bg-white">
       <form className="flex items-center" onSubmit={handleSubmit}>
@@ -33,6 +41,7 @@ const AddProject: React.FC = () => {
               placeholder="Project name"
               value={name}
               onChange={handleNameChange}
+              ref={inputRef}
             />
           </div>
         </Col>
